@@ -8,7 +8,7 @@ resource "azurerm_resource_group" "example" {
 }
 
 resource "azurerm_storage_account" "example" {
-  name                     = "examplesa"
+  name                     = "exampleav250101"
   resource_group_name      = azurerm_resource_group.example.name
   location                 = azurerm_resource_group.example.location
   account_tier             = "Standard"
@@ -29,12 +29,34 @@ resource "azurerm_mssql_database" "test" {
   server_id      = azurerm_mssql_server.example.id
   collation      = "SQL_Latin1_General_CP1_CI_AS"
   license_type   = "LicenseIncluded"
-  max_size_gb    = 4
-  read_scale     = true
-  sku_name       = "S0"
-  zone_redundant = true
+  max_size_gb    = 2
+  read_scale     = false
+  sku_name       = "Basic"
+  zone_redundant = false
 
   tags = {
     foo = "bar"
+  }
+}
+
+resource "azurerm_service_plan" "example" {
+  name                = "example"
+  resource_group_name = azurerm_resource_group.example.name
+  location            = azurerm_resource_group.example.location
+  os_type             = "Linux"
+  sku_name            = "F1"
+}
+
+resource "azurerm_linux_web_app" "example" {
+  name                = "example-av2501"
+  resource_group_name = azurerm_resource_group.example.name
+  location            = azurerm_service_plan.example.location
+  service_plan_id     = azurerm_service_plan.example.id
+
+  site_config {
+	always_on = false
+    application_stack {
+		dotnet_version = "6.0"
+	}
   }
 }
