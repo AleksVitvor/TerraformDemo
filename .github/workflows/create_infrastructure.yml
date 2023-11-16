@@ -1,12 +1,11 @@
 name: "CICD Infra"
 
-trigger:
-  branches:
-    include:
+on:
+  push:
+    branches:
       - main
-  paths:
-    include:
-      - terraform
+  workflow_dispatch:
+
 
 variables:
   - name: terraform_path
