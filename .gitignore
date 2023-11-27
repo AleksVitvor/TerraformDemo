@@ -215,3 +215,8 @@ ModelManifest.xml
 StyleCop.Cache
 
 publish/
+*.tfvars
+*.tfstate
+*.backup
+terraform/.terraform/
+terraform/.terraform.lock.hcl
