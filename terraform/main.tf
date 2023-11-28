@@ -56,8 +56,8 @@ resource "azurerm_mssql_server" "example" {
   resource_group_name          = azurerm_resource_group.example.name
   location                     = azurerm_resource_group.example.location
   version                      = "12.0"
-  administrator_login          = "4dm1n157r470r"
-  administrator_login_password = "4-v3ry-53cr37-p455w0rd"
+  administrator_login          = var.sql-server-login
+  administrator_login_password = var.sql-server-password
   public_network_access_enabled = false
 }
 
@@ -68,7 +68,7 @@ resource "azurerm_mssql_database" "test" {
   license_type   = "LicenseIncluded"
   max_size_gb    = 2
   read_scale     = false
-  sku_name       = "Basic"
+  sku_name       = var.sql-server-sku
   zone_redundant = false
 
   tags = {
@@ -117,7 +117,7 @@ resource "azurerm_service_plan" "example" {
   resource_group_name = azurerm_resource_group.example.name
   location            = azurerm_resource_group.example.location
   os_type             = "Linux"
-  sku_name            = "F1"
+  sku_name            = var.service-plan-sku
 }
 
 resource "azurerm_linux_web_app" "example" {

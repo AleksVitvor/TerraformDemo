@@ -36,3 +36,23 @@ variable "location" {
   type = string
   description = "Location for resource group"
 }
+
+variable "sql-server-login" {
+  type = string
+  description = "Login for sql server"
+}
+
+variable "sql-server-password" {
+  type = string
+  description = "Login for sql server"
+}
+
+variable "sql-server-sku" {
+  type = string
+  description = "SKU for SQL Server"
+}
+
+variable "service-plan-sku" {
+  type = string
+  description = "SKU for Azure Service plan"
+}
